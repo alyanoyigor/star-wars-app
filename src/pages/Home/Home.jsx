@@ -1,11 +1,11 @@
-import { Container } from '../../components/Container';
+import { MainContainer } from 'styles';
 import { Link as RouterLink } from 'react-router-dom';
 import { CustomButton, Title, Wrapper } from './styled';
 
 export const Home = () => {
 	return (
 		<Wrapper>
-			<Container>
+			<MainContainer>
 				<Title>
 					<span>Welcome</span> <br />
 					to Star Wars App
@@ -13,7 +13,7 @@ export const Home = () => {
 				<CustomButton component={RouterLink} to='/characters'>
 					To Characters
 				</CustomButton>
-			</Container>
+			</MainContainer>
 		</Wrapper>
 	);
 };

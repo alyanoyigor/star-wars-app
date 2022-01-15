@@ -13,30 +13,10 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
 import axios from 'axios';
-import SearchIcon from '@mui/icons-material/Search';
-import {
-	CharactersToolbar,
-	Search,
-	SearchIconWrapper,
-	StyledInputBase,
-} from './styles';
-import { IconDrop } from './components/IconDrop';
-
-const SearchAppBar = ({ search, setSearch }) => {
-	return (
-		<Search>
-			<SearchIconWrapper>
-				<SearchIcon />
-			</SearchIconWrapper>
-			<StyledInputBase
-				onChange={(e) => setSearch(e.target.value)}
-				value={search}
-				placeholder='Search…'
-				inputProps={{ 'aria-label': 'search' }}
-			/>
-		</Search>
-	);
-};
+import { IconDrop } from './components/IconDrop/IconDrop';
+import { CharactersToolbar } from './styles';
+import { SearchTableBar } from './components/SearchTableBar/SearchTableBar';
+import { MainContainer } from 'styles';
 
 function descendingComparator(a, b, orderBy) {
 	let firstEl = a[orderBy];
@@ -74,22 +54,18 @@ function getComparator(order, orderBy) {
 const headCells = [
 	{
 		id: 'name',
-		numeric: false,
 		label: 'Name',
 	},
 	{
 		id: 'birth_year',
-		numeric: true,
 		label: 'Birth Year',
 	},
 	{
 		id: 'height',
-		numeric: true,
 		label: 'Height',
 	},
 	{
 		id: 'mass',
-		numeric: true,
 		label: 'Mass',
 	},
 ];
@@ -191,7 +167,7 @@ const EnhancedTableToolbar = ({ search, setSearch }) => {
 			>
 				Characters
 			</Typography>
-			<SearchAppBar search={search} setSearch={setSearch} />
+			<SearchTableBar search={search} setSearch={setSearch} />
 		</CharactersToolbar>
 	);
 };
@@ -233,64 +209,66 @@ export function CustomTable({ characters, setCharacters }) {
 		search
 	);
 	return (
-		<Box sx={{ width: '100%' }}>
-			<Paper
-				sx={{
-					width: '100%',
-					mb: 5,
-					backgroundColor: '#000',
-					color: '#fff',
-					borderRadius: 0,
-				}}
-			>
-				<EnhancedTableToolbar search={search} setSearch={setSearch} />
-				<TableContainer>
-					<Table sx={{ minWidth: 750 }} aria-labelledby='tableTitle'>
-						<EnhancedTableHead
-							order={order}
-							orderBy={orderBy}
-							onRequestSort={handleRequestSort}
-							rowCount={characters.length}
-						/>
-						<TableBody>
-							{filteredData
-								.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-								.map((data, index) => {
-									return (
-										<TableRow
-											hover
-											tabIndex={-1}
-											key={data.name}
-											sx={{ '&& > *': { color: '#fff' } }}
-										>
-											<TableCell component='th' scope='row'>
-												{data.name}
-											</TableCell>
-											<TableCell align='left'>{data.birth_year}</TableCell>
-											<TableCell align='left'>{data.height}</TableCell>
-											<TableCell align='left'>{data.mass}</TableCell>
-										</TableRow>
-									);
-								})}
-							{emptyRows > 0 && (
-								<TableRow>
-									<TableCell colSpan={6} />
-								</TableRow>
-							)}
-						</TableBody>
-					</Table>
-				</TableContainer>
-				<TablePagination
-					sx={{ color: '#fff' }}
-					rowsPerPageOptions={[5, 10, 25]}
-					component='div'
-					count={filteredData.length}
-					rowsPerPage={rowsPerPage}
-					page={page}
-					onPageChange={handleChangePage}
-					onRowsPerPageChange={handleChangeRowsPerPage}
-				/>
-			</Paper>
-		</Box>
+		<MainContainer>
+			<Box sx={{ width: '100%' }}>
+				<Paper
+					sx={{
+						width: '100%',
+						mb: 5,
+						backgroundColor: '#000',
+						color: '#fff',
+						borderRadius: 0,
+					}}
+				>
+					<EnhancedTableToolbar search={search} setSearch={setSearch} />
+					<TableContainer>
+						<Table sx={{ minWidth: 750 }} aria-labelledby='tableTitle'>
+							<EnhancedTableHead
+								order={order}
+								orderBy={orderBy}
+								onRequestSort={handleRequestSort}
+								rowCount={characters.length}
+							/>
+							<TableBody>
+								{filteredData
+									.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+									.map((data, index) => {
+										return (
+											<TableRow
+												hover
+												tabIndex={-1}
+												key={data.name}
+												sx={{ '&& > *': { color: '#fff' } }}
+											>
+												<TableCell component='th' scope='row'>
+													{data.name}
+												</TableCell>
+												<TableCell align='left'>{data.birth_year}</TableCell>
+												<TableCell align='left'>{data.height}</TableCell>
+												<TableCell align='left'>{data.mass}</TableCell>
+											</TableRow>
+										);
+									})}
+								{emptyRows > 0 && (
+									<TableRow>
+										<TableCell colSpan={6} />
+									</TableRow>
+								)}
+							</TableBody>
+						</Table>
+					</TableContainer>
+					<TablePagination
+						sx={{ color: '#fff' }}
+						rowsPerPageOptions={[5, 10, 25]}
+						component='div'
+						count={filteredData.length}
+						rowsPerPage={rowsPerPage}
+						page={page}
+						onPageChange={handleChangePage}
+						onRowsPerPageChange={handleChangeRowsPerPage}
+					/>
+				</Paper>
+			</Box>
+		</MainContainer>
 	);
 }

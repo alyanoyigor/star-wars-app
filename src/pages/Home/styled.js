@@ -1,7 +1,7 @@
-import starWarsBg from '../../assets/img/star-wars-bg.jpg';
+import starWarsBg from 'assets/img/star-wars-bg.jpg';
 import Link from '@mui/material/Link';
-import { styled } from '@mui/system';
 import Box from '@mui/material/Box';
+import { styled } from '@mui/system';
 
 export const Title = styled('h1')`
 	font-family: var(--f-main);
@@ -35,7 +35,7 @@ export const Title = styled('h1')`
 
 export const Wrapper = styled(Box)`
 	width: 100%;
-	height: calc(100vh - 7rem);
+	height: calc(100vh - 9rem);
 	background-image: url(${starWarsBg});
 	background-repeat: no-repeat;
 	background-size: cover;
