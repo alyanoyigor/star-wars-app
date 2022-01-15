@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import { styled } from '@mui/system';
 
-export const Container = styled.div`
+export const Container = styled('div')`
 	max-width: 1240px;
 	margin: 0 auto;
 	padding: 0 2rem;

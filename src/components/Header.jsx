@@ -1,26 +1,25 @@
 import { Container } from './Container';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import { Link as RouterLink } from 'react-router-dom';
+import { styled } from '@mui/system';
+import Link from '@mui/material/Link';
 import logo from '../assets/svg/star-wars.svg';
 
-const HeaderEl = styled.header`
+const HeaderEl = styled('header')`
 	background-color: #000;
 `;
 
-const Wrapper = styled.div`
+const Wrapper = styled('div')`
 	height: 7rem;
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-  margin: 0 auto;
+	margin: 0 auto;
 	flex-wrap: wrap;
 	max-width: 300px;
 `;
 
-const TitleLink = styled(Link).attrs({
-	to: '/',
-})`
+const TitleLink = styled(Link)`
 	flex-shrink: 0;
 	background-image: url(${logo});
 	width: 5rem;
@@ -30,9 +29,7 @@ const TitleLink = styled(Link).attrs({
 	background-repeat: no-repeat;
 `;
 
-const TableLink = styled(Link).attrs({
-	to: '/characters',
-})`
+const TableLink = styled(Link)`
 	text-decoration: none;
 	color: #fff;
 	font-family: var(--f-main);
@@ -44,8 +41,10 @@ export const Header = () => {
 		<HeaderEl>
 			<Container>
 				<Wrapper>
-					<TitleLink />
-					<TableLink>Characters</TableLink>
+					<TitleLink component={RouterLink} to='/' />
+					<TableLink component={RouterLink} to='/characters'>
+						Characters
+					</TableLink>
 				</Wrapper>
 			</Container>
 		</HeaderEl>

@@ -1,9 +1,9 @@
-import { Container } from '../components/Container';
-import starWarsBg from '../assets/img/star-wars-bg.jpg';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import starWarsBg from '../../assets/img/star-wars-bg.jpg';
+import Link from '@mui/material/Link';
+import { styled } from '@mui/system';
+import Box from '@mui/material/Box';
 
-const Title = styled.h1`
+export const Title = styled('h1')`
 	font-family: var(--f-main);
 	margin: 0;
 	padding-top: 2rem;
@@ -33,7 +33,7 @@ const Title = styled.h1`
 	}
 `;
 
-const Wrapper = styled.div`
+export const Wrapper = styled(Box)`
 	width: 100%;
 	height: calc(100vh - 7rem);
 	background-image: url(${starWarsBg});
@@ -47,7 +47,7 @@ const Wrapper = styled.div`
 	}
 `;
 
-const CustomButton = styled(Link).attrs({ to: '/characters' })`
+export const CustomButton = styled(Link)`
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -58,31 +58,17 @@ const CustomButton = styled(Link).attrs({ to: '/characters' })`
 	max-width: 180px;
 	font-size: 0.9rem;
 	height: 50px;
-	background-color: #6e0526;
+	background-color: var(--colors-ui-main);
 	color: #fff;
 	text-decoration: none;
 	transition: all 0.5s;
-	box-shadow: rgba(200, 17, 74, 0.4) 0 8px 64px;
+	box-shadow: var(--shadow-ui);
 
 	&:hover {
-		background-color: #920732;
+		background-color: var(--colors-ui-second);
 	}
 
 	@media (max-width: 720px) {
 		margin: 2rem auto 0;
 	}
 `;
-
-export const Home = () => {
-	return (
-		<Wrapper>
-			<Container>
-				<Title>
-					<span>Welcome</span> <br />
-					to Star Wars App
-				</Title>
-				<CustomButton>To Characters</CustomButton>
-			</Container>
-		</Wrapper>
-	);
-};
